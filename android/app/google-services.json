@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "338068893965",
+    "firebase_url": "https://sportsbnb-39122.firebaseio.com",
+    "project_id": "sportsbnb-39122",
+    "storage_bucket": "sportsbnb-39122.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338068893965:android:dacdce705db30ac46b4044",
+        "android_client_info": {
+          "package_name": "com.example.sports_bnb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338068893965-3gj310rhknd09jjtg0hisu63j4in2pkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATi1am3dVVq4tUSqkiHhBJ-P_7H9sK_-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338068893965-3gj310rhknd09jjtg0hisu63j4in2pkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338068893965:android:54aac0478c0987a36b4044",
+        "android_client_info": {
+          "package_name": "com.example.sportsbnb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338068893965-3gj310rhknd09jjtg0hisu63j4in2pkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATi1am3dVVq4tUSqkiHhBJ-P_7H9sK_-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338068893965-3gj310rhknd09jjtg0hisu63j4in2pkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
