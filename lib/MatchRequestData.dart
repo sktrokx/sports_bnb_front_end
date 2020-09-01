@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class MatchRequestData 
 {
+  
   bool hasAccepted = false;
   bool hasDeclined = false;
   OrganizerData organizerData;
@@ -30,6 +31,7 @@ MatchRequestData(Map<String,dynamic> json)
 
 class MatchData
 {
+  int cost;
   int matchId;
   String title;
   String city;
@@ -38,6 +40,7 @@ class MatchData
   String time;
   MatchData(Map<String,dynamic> json)
   {
+    this.cost = json['cost'];
     this.matchId = json['id'];
     this.title = json['title'];
     this.city = json['city'];

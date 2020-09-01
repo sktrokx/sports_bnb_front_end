@@ -30,6 +30,7 @@ class ReportAnInjuryState extends State<ReportAnInjury>
   ,Language.Language.other];
   String selectedReason = Language.Language.holidays;
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+  DateFormat dateFormatToSenf = DateFormat('yyyy-MM-dd HH:mm');
   DateTime toDate;
   DateTime fromDate;
   final _formKey = GlobalKey<FormState>();
@@ -377,8 +378,8 @@ Widget customButton()
                 if(unavailableDateFrom!= null)
                 {
                 setState(() {
-                  // fromDate = DateTime(unavailableDateFrom.year,unavailableDateFrom.month,unavailableDateFrom.day,DateTime.now().hour,DateTime.now().minute);
-                  fromDate = DateTime(unavailableDateFrom.year,unavailableDateFrom.month,unavailableDateFrom.day);
+                  fromDate = DateTime(unavailableDateFrom.year,unavailableDateFrom.month,unavailableDateFrom.day,DateTime.now().hour,DateTime.now().minute);
+                  // fromDate = DateTime(unavailableDateFrom.year,unavailableDateFrom.month,unavailableDateFrom.day);
 
 
                 });
@@ -395,8 +396,8 @@ Widget customButton()
                 if(unavailableDateTo!=null)
                 {
                 setState(() {
-                  // toDate =  DateTime(unavailableDateTo.year,unavailableDateTo.month,unavailableDateTo.day,DateTime.now().hour,DateTime.now().minute);
-                  toDate =  DateTime(unavailableDateTo.year,unavailableDateTo.month,unavailableDateTo.day);
+                  toDate =  DateTime(unavailableDateTo.year,unavailableDateTo.month,unavailableDateTo.day,DateTime.now().hour,DateTime.now().minute);
+                  // toDate =  DateTime(unavailableDateTo.year,unavailableDateTo.month,unavailableDateTo.day);
                     
                     debugPrint(toDate.toString());
                 });
@@ -421,8 +422,8 @@ async
          'Authorization':'Token '+UserCredentials.credentialsInstance.getTokenOfUser       },
        body: jsonEncode(<String,dynamic> 
        {
-        'to_date':dateFormat.format(toDate),
-        'from_date':dateFormat.format(fromDate),
+        'to_date':dateFormatToSenf.format(toDate),
+        'from_date':dateFormatToSenf.format(fromDate),
         // 'to_date':toDate,
         // 'from_date':fromDate,
         

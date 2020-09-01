@@ -60,8 +60,8 @@ static String continueToLeave = 'adding new one will add them in bench or waitin
 
 static String reequired = 'required';
 //Logout screen
-
-
+static String cost = 'cost';
+static String enterCost = 'enter cost';
 static String settings = 'Settings';
 static String uploadPicture  ='upload picture';
 static String logout = 'Logout';
@@ -75,7 +75,7 @@ static String phoneNumber = 'phone number';
 // static String email = 'email';
 static String save = 'Save';
 static String dataCanNotBeUploaded = 'data can not be uploaded';
-
+static String player = 'Player';
 
 static String selectMatchType = 'select match type';
 static String selectFrequencyOfMatch = 'will be played after every';
@@ -87,6 +87,9 @@ static String teams = 'Teams';
 static String choose = 'Choose';
 static String selecetPlayerFrom = 'select player from';
 static String addFromTeams = 'add from teams';
+static String organized = 'Organized';
+static String requests= 'Requests';
+static String profile = 'Profile';
 static String searchPlayers = 'search players';
 // static String noPlayersAdded = 'no players added';
 static String addPlayer = 'add player';
@@ -209,7 +212,7 @@ static String teamAdded = 'Team added';
 static String add = 'Add';
 static String requestSent = 'request sent';
 static String noDeclinedRequests = 'no requests declined';
-static String requests = 'Requests';
+// static String requests = 'Requests';
 static String noRequestsSent = 'no request sent';
 static String onTeam = 'on team';
 

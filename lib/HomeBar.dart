@@ -1,4 +1,4 @@
-
+import 'package:sportsbnb/EnglishLanguage.dart' as Language;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +9,7 @@ import 'package:sportsbnb/Logout.dart';
 import 'package:sportsbnb/Matches.dart';
 import 'package:sportsbnb/TabScreenForMatchDetails.dart';
 import 'package:sportsbnb/TabScreenForRequests.dart';
-
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 class HomeBar extends StatefulWidget
 {
  
@@ -61,10 +61,74 @@ final pages = [
      bottomNavigationBar: CurvedNavigationBar(
        
        items:<Widget>[
-         Icon(Icons.home),
-         Icon(Icons.featured_play_list),
-          Icon(Icons.notifications_active),
-         Icon(Icons.lock)
+         Column(
+           children: [
+             Expanded(
+               flex: 10,
+               child: Icon(MdiIcons.soccer)),
+               Expanded(
+                 flex: 1,
+                 child: 
+               
+               Text(Language.Language.playing,
+               style: TextStyle(
+                 fontWeight: FontWeight.bold
+               ),
+               )
+               )
+           ],
+         ),
+             Column(
+           children: [
+             Expanded(
+               flex: 10,
+               child: Icon(MdiIcons.soccerField)),
+               Expanded(
+                 flex: 1,
+                 child: 
+               
+               Text(Language.Language.organized,
+               style: TextStyle(
+                 fontWeight: FontWeight.bold
+               ),
+               )
+               )
+           ],
+         ),
+              Column(
+           children: [
+             Expanded(
+               flex: 10,
+               child: Icon(Icons.notifications_active)),
+               Expanded(
+                 flex: 1,
+                 child: 
+               
+               Text(Language.Language.requests,
+               style: TextStyle(
+                 fontWeight: FontWeight.bold
+               ),
+               )
+               )
+           ],
+         ),
+             Column(
+           children: [
+             Expanded(
+               flex: 10,
+               child: Icon(Icons.lock)),
+               Expanded(
+                 flex: 1,
+                 child: 
+               
+               Text(Language.Language.profile,
+               style: TextStyle(
+                 fontWeight: FontWeight.bold
+               ),
+               )
+               )
+           ],
+         ),
        ],
        onTap: (index)
        {  

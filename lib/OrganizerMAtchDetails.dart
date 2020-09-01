@@ -66,7 +66,7 @@ Widget build(BuildContext context) {
 return 
 
 Scaffold(
-floatingActionButton: getFloatingActionButton(),
+// floatingActionButton: getFloatingActionButton(),
 appBar: AppBar(
 backgroundColor: Theme.of(context).bottomAppBarColor,
 title: Text(appBarTitle
@@ -303,10 +303,13 @@ printComment(snapshotData.comment)
                                         {
                                             return AlertDialog(
                                                 title: Text(Language.Language.whereToMOve),
-                                              //  content: Text(Language.Language.continueToLeave),
+                                               content: Text(Language.Language.continueToLeave),
+                                              
+                                              
                                                 actions: <Widget>[
                                                   Row(
                                                     children: <Widget>[
+                                                
                                                                       dontDelete(Language.Language.teams,context),
                                                     yesDelete(Language.Language.searchPlayers,matchId)
                                                                             
@@ -355,7 +358,9 @@ printComment(snapshotData.comment)
                                                               shape: RoundedRectangleBorder(
                                                               borderRadius: BorderRadius.circular(10)
                                                               ),
-                                                              child: Text(res),
+                                                              child: Container(
+                                                                
+                                                                child: Center(child: Text(res))),
                                                             )
                                                             
                                                             );

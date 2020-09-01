@@ -13,8 +13,10 @@ MatchData matchData;
   int matchId;
   int maxPlayers;
   int totalPlayers;
+  
 PlayersMatchesFound(Map<String,dynamic> json)
 {
+  
   this.id = json['id'];
   this.totalPlayers = json['total_players'];
   this.playerId = json['user_id'];
@@ -27,6 +29,7 @@ PlayersMatchesFound(Map<String,dynamic> json)
 
 class MatchData
 {
+  int cost;
   String addressOfStadium;
   String date;
   String time;
@@ -36,6 +39,7 @@ class MatchData
 
 MatchData(Map<String,dynamic> json)
 {
+  this.cost = json['cost'];
   this.addressOfStadium = json['address_of_stadium'];
   this.title = json['title'];
   this.city = json['city'];

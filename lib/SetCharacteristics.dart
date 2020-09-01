@@ -227,7 +227,8 @@ children: [
               if(response.statusCode == 200)
               {
                   Navigator.pop(context);
-                 Navigator.pop(context);
+                 Navigator.pop(context,true);
+
               }
               else if(response.statusCode == 401)
 {

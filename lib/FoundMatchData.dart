@@ -20,8 +20,10 @@ class FoundMatchData
   String dateAndTime;
 int id;
 int benchListLimit;
+int cost;
   FoundMatchData(Map<String,dynamic> json)
   {
+    this.cost = json['cost'];
     this.benchListLimit = json['bench_list_limit'];
     this.benchListExist = json['bench_list'];
     this.city = json['city'];

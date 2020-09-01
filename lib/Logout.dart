@@ -33,9 +33,9 @@ return LogoutState();
 
 }
 
-class LogoutState extends State<Logout>
+class LogoutState <T extends StatefulWidget> extends State<T>
 {
-
+bool callSetStateWhenPoppingScreen = false;
 TextEditingController firstNameController = TextEditingController();
 TextEditingController lastNameController = TextEditingController();
 TextEditingController customMessageController = TextEditingController();
@@ -84,7 +84,7 @@ elevation: 10,
 backgroundColor: Theme.of(context).bottomAppBarColor,),
 
 body: FutureBuilder(
-future: getUserInformation,
+future: userInformation(),
 builder: (context,snapshot)
 {
 if(snapshot.data == null)
@@ -271,9 +271,16 @@ left: MediaQuery.of(context).size.width/1.2,
 top:MediaQuery.of(context).size.height/3.39,
 child: GestureDetector(
 onTap: ()
+async
 {
-updateUserInformation(context,snapshot.data.firstName, snapshot.data.lastName,
+callSetStateWhenPoppingScreen = await updateUserInformation(context,snapshot.data.firstName, snapshot.data.lastName,
 snapshot.data.phoneNumber, snapshot.data.email) ;
+if(callSetStateWhenPoppingScreen ==true)
+{
+  setState(() {
+    callSetStateWhenPoppingScreen = false;
+  });
+}
 },
 child: Icon(Icons.edit)
 )
@@ -647,7 +654,8 @@ ErrorConnecting.ConnectingIssue(context);
       Future changeProfilePicture()
       async
       {
-        Loading.ShowLoadingDialog.showLoaderDialog(context);
+
+       Loading.ShowLoadingDialog.showLoaderDialog(context);
       final ImagePicker picker = ImagePicker();
       var pickedImage = await picker.getImage(source: ImageSource.gallery);
       if(pickedImage != null)
@@ -828,10 +836,8 @@ ErrorConnecting.ConnectingIssue(context);
             {
           // userInformation();
             Navigator.pop(context);
-            Navigator.pop(context);
-            setState(() {
-              
-            });
+            Navigator.pop(context,true);
+           
             }
             else if(response.statusCode == 401)
 {
@@ -982,7 +988,7 @@ var response = await http.post(pathToSetUserAvailabilityToTrue
 ,
 headers: <String,String>
 {
-'Content-Type':'application',
+'Content-Type':'application/json',
 'Authorization':'Token ' + UserCredentials.credentialsInstance.getTokenOfUser
 },
 body: jsonEncode(<String,dynamic>
@@ -1052,13 +1058,21 @@ return AlertDialog(
 }
 
 
-void screenForUserCharacteristics(BuildContext context,snap) 
+Future  screenForUserCharacteristics(BuildContext context,snap) 
+async
 {
-Navigator.push(context, MaterialPageRoute(builder: (context)
+
+callSetStateWhenPoppingScreen = await Navigator.push(context, MaterialPageRoute(builder: (context)
 {
 return SetCharacteristics(snap);
 }
 ));
+if(callSetStateWhenPoppingScreen == true)
+{
+  setState(() {
+    callSetStateWhenPoppingScreen = false;
+  });
+}
 }
 
 void showDialogForCustomMessage() 

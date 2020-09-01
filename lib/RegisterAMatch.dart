@@ -13,6 +13,7 @@ import 'package:sportsbnb/UserCredentials.dart';
 import 'package:sportsbnb/EnglishLanguage.dart' as Language;
 class RegisterAMatch extends StatefulWidget
 {
+  int cost;
   int benchListLimit;
   bool benchList;
 String title;
@@ -25,8 +26,9 @@ int matchType;
 int id;
 String titleOfButton;
 String dateAndTime;
-RegisterAMatch(title,city,address,dateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit)
+RegisterAMatch(title,city,address,dateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit,cost)
 {
+  this.cost  = cost;
   this.benchListLimit = benchListLimit;
   this.benchList = benchList; 
 this.dateAndTime= dateAndTime;
@@ -42,13 +44,14 @@ this.titleOfButton = titleOfButton;
 }
 @override
 State<StatefulWidget> createState() {
-return RegisterAMatchState(title,city,address,dateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit);
+return RegisterAMatchState(title,city,address,dateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit,cost);
 }
 
 }
 
 class RegisterAMatchState <T extends StatefulWidget> extends State<T>
 {
+  int cost;
   bool benchListAllowed = false;
   bool benchList;
 String title;
@@ -61,8 +64,9 @@ int id;
 DateTime dateAndTime;
 String titleOfButton;
 // dateAndTime = DateTime();
-RegisterAMatchState(title,city,address,String currentDateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit)
+RegisterAMatchState(title,city,address,String currentDateAndTime,frequency,matchType,id,benchList,titleOfButton,benchListLimit,cost)
 {
+  this.cost = cost;
   this.selectedPlayersOnBenchCount = benchListLimit;
   this.benchList = benchList;
 this.title = title;
@@ -92,7 +96,7 @@ List<String> matchType = [Language.Language.fivePlayers,Language.Language.sevenP
 
 TextEditingController titleController = TextEditingController();
 TextEditingController cityController = TextEditingController();
-
+TextEditingController costController = TextEditingController();
 TextEditingController addressController = TextEditingController();
 
 String titleLabel = Language.Language.titleLable;
@@ -114,6 +118,7 @@ super.initState();
 titleController.text = title;
 cityController.text = city;
 addressController.text =  address;
+costController.text = cost.toString();
 }
 @override
 Widget build(BuildContext context) {
@@ -122,7 +127,7 @@ Widget build(BuildContext context) {
   checkTilePos = MediaQuery.of(context).size.width-30;
 centerOfDevice = MediaQuery.of(context).size.width/2;
 return  Scaffold(
-backgroundColor: Theme.of(context).accentColor,
+// backgroundColor: Theme.of(context).accentColor,
 appBar: AppBar(
 leading: Container(),
 backgroundColor: Theme.of(context).bottomAppBarColor,
@@ -174,35 +179,50 @@ Container(
       
     
     child: customTextField(addressController,addressLabel,addressReturn))),
+
+
   Positioned(
-    top: MediaQuery.of(context).size.height/3.19,
+    top: MediaQuery.of(context).size.height/4,
+     left:centerOfDevice - sizeOfTextField/2,
+     
+    child: Container(
+      height: MediaQuery.of(context).size.height/10,
+      width: sizeOfTextField,
+      
+    
+    child: customTextFieldForCost(costController,Language.Language.cost,Language.Language.enterCost))),
+
+  Positioned(
+    top: MediaQuery.of(context).size.height/2.7,
      left:centerOfDevice - dropdownPos/2,
      
       child: Text(Language.Language.selectMatchType
     ,
     style: TextStyle(
     fontSize: 18,
-    color: Colors.white
+    color: Colors.black
     ),
     ),
   ),
   
   
    Positioned(
-     top: MediaQuery.of(context).size.height/3,
+     top: MediaQuery.of(context).size.height/2.55,
      left:centerOfDevice - dropdownPos/2,
      
-     child: matchTypeDropDown()),
+     child: Container(
+      //  color:Colors.red,
+       child: matchTypeDropDown())),
   
   
    Positioned(
-     top: MediaQuery.of(context).size.height/2.4,
+     top: MediaQuery.of(context).size.height/2.2,
      left:centerOfDevice - dropdownPos/2,
         child: Text(Language.Language.selectFrequencyOfMatch
   ,
   style: TextStyle(
   fontSize: 18,
-  color: Colors.white
+  color: Colors.black
   ),
   ),
    ),
@@ -210,12 +230,12 @@ Container(
   
   
    Positioned(
-     top: MediaQuery.of(context).size.height/2.3,
+     top: MediaQuery.of(context).size.height/2.1,
      left: centerOfDevice - dropdownPos/2,
      child: frequencyDropDown()),
   
    Positioned(
-     top: MediaQuery.of(context).size.height/1.9,
+     top: MediaQuery.of(context).size.height/1.8,
      left: centerOfDevice- checkTilePos/2,
      child: Container(
        height: MediaQuery.of(context).size.height/14,
@@ -340,7 +360,38 @@ Container(
                                 ),
                               );
                 }
+
+ Widget customTextFieldForCost(TextEditingController controller, String label, String returnLabel)
+                {
+                  return 
+                              Padding(
+                                padding: const EdgeInsets.only(top:25,left:25,right:25),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  elevation: 20,
+                                                  child: TextFormField(
+                                      obscureText: false,
               
+                                        decoration: InputDecoration(
+                                        border:OutlineInputBorder(
+                                          //  borderSide: new BorderSide(color: Colors.deepOrange),
+                                            borderRadius: BorderRadius.circular(20)
+                                            ),
+                                          
+                                            labelText: label,
+              
+                                        ),
+                                      controller: controller,
+                                      
+                                    ),
+                                ),
+                              );
+                }
+
+
+
                 Future postAMatch()
                 async
                 {
@@ -371,8 +422,8 @@ Container(
                                       11,
                                       'frequency':selectedFrequency,
                                       'bench_list':benchList,
-                                      'bench_list_limit':(benchList == true)?selectedPlayersOnBenchCount:0
-
+                                      'bench_list_limit':(benchList == true)?selectedPlayersOnBenchCount:0,
+                                      'cost':costController.text.toString()
                                               }
                                     )
                                     );
@@ -383,10 +434,8 @@ Container(
                                           
                                           responseFromNetwork = '';
                                         });
-                                        Navigator.pop(context);
-                                        setState(() {
-                                          
-                                        });
+                                        Navigator.pop(context,true);
+                                      
                                       }
                               
                                       else if(response.statusCode == 203)
@@ -464,6 +513,9 @@ Container(
                                       'frequency':selectedFrequency,
                                       'bench_list':benchList,
                                       'bench_list_limit':(benchListAllowed == true)?selectedPlayersOnBenchCount:0
+                                      ,
+                                      'cost':costController.text.toString()
+                                            
                                               }
                                     )
                                     );
@@ -474,10 +526,8 @@ Container(
                                           
                                           responseFromNetwork = '';
                                         });
-                                        Navigator.pop(context);
-                                        setState(() {
-                                          
-                                        });
+                                        Navigator.pop(context,true);
+                                     
                                       }
                               
                                       else if(response.statusCode == 203)
@@ -619,7 +669,7 @@ Container(
   dropdownColor: Colors.blue,
   iconSize: 24,
   elevation: 16,
-  style: TextStyle(color: Colors.white),
+  style: TextStyle(color: Colors.black),
   underline: Container(
   height: 2,
   color: Theme.of(context).buttonColor,
@@ -653,7 +703,7 @@ Container(
   dropdownColor: Colors.blue,
   iconSize: 24,
   elevation: 16,
-  style: TextStyle(color: Colors.white),
+  style: TextStyle(color: Colors.black),
   underline: Container(
   height: 2,
   color: Theme.of(context).buttonColor,
@@ -697,10 +747,13 @@ Container(
   Widget allowBenchList() 
   {
   return Card(
+  color: Theme.of(context).buttonColor,
   child: CheckboxListTile(
+    checkColor: Colors.white,
   title: Text(Language.Language.bench,
   style: TextStyle(
-  fontSize: 18
+  fontSize: 18,
+  color: Colors.white
   ),
   ),
   // value:timeDilation !=1,
@@ -726,7 +779,7 @@ Container(
   dropdownColor: Colors.blue,
   iconSize: 24,
   elevation: 16,
-  style: TextStyle(color: Colors.white),
+  style: TextStyle(color: Colors.black),
   underline: Container(
   height: 2,
   color: Theme.of(context).buttonColor,

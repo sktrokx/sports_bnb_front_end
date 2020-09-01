@@ -13,6 +13,8 @@ import 'package:sportsbnb/OnWaitingList.dart';
 import 'package:sportsbnb/OrganizerMAtchDetails.dart';
 import 'package:sportsbnb/PlayerMatchesFound.dart';
 import 'package:sportsbnb/RectangularSliderTrackShape.dart';
+import 'package:sportsbnb/SearchPlayers.dart';
+import 'package:sportsbnb/TeamForMatch.dart';
 import 'package:sportsbnb/UnConfirmedPlayers.dart';
 import 'package:http/http.dart' as http;
 import 'package:sportsbnb/UserCredentials.dart';
@@ -518,7 +520,7 @@ toNavigate(context,OnBenchList(matchId, totalPlayers, matchType));
            ),
             
                       child: Container(
-               height: MediaQuery.of(context).size.height/3,
+               height: MediaQuery.of(context).size.height/2.5,
       child: Column(
         children: [
           individualDetailsOfMatch(Language.Language.title,data.title,'',0),
@@ -528,54 +530,214 @@ toNavigate(context,OnBenchList(matchId, totalPlayers, matchType));
           individualDetailsOfMatch(Language.Language.time,  data.time,'',0),
           individualDetailsOfMatch(Language.Language.reoccurence,  data.frequency.toString(),Language.Language.days,30),
           individualDetailsOfMatch(Language.Language.maxPlayers,  data.matchType.toString(),Language.Language.players,0),
+          Align(
+alignment: AlignmentDirectional.centerEnd,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(25)
+,
+                              topRight: Radius.circular(5)
 
+              )),
+              elevation: 10,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(25)
+,
+                              topRight: Radius.circular(5)
 
-                  ],
-                ),             
+                            ),
+                                                      child: GestureDetector(
+onTap: ()
+{
+  showDialogForOptions();
+  }
+  ,
+                                                                                                                child: Container(
+                  height: MediaQuery.of(context).size.height/15,
+                  width: MediaQuery.of(context).size.width/4,
+                  color: Theme.of(context).buttonColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(Language.Language.player,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                        ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Icon(Icons.add,
+                          color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                                                        ),
+                            ),
+              ),
+            )
+  
+                    ],
+                  ),             
+                         ),
                        ),
-                     ),
-                
-                 );
-               }
-          
-           Widget individualDetailsOfMatch(String title, title2,extra,toAddInWidth)
-            {
-              return Padding(
-                padding: const EdgeInsets.only(top:15,left: 20),
-                child: Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width/4.7 + toAddInWidth,
-
-                      // color:Colors.red,
-                      child: Text('${title}:',
+                  
+                   );
+                 }
+            
+             Widget individualDetailsOfMatch(String title, title2,extra,toAddInWidth)
+              {
+                return Padding(
+                  padding: const EdgeInsets.only(top:15,left: 20),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width/4.7 + toAddInWidth,
+  
+                        // color:Colors.red,
+                        child: Text('${title}:',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black
+                        ),
+                        ),
+                      ),
+  Text('${title2} ${extra}',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black
                       ),
                       ),
-                    ),
-Text('${title2} ${extra}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                    ),
-                    ),
-                    
-                  ],
-
-                ),
-              );
-            }
-            toNavigate(BuildContext context,whereToNavigate)
-            {
-              Navigator.push(context, MaterialPageRoute(builder: (context)
-              {
-                return whereToNavigate;
+                      
+                    ],
+  
+                  ),
+                );
               }
-              ));
-            }
+              toNavigate(BuildContext context,whereToNavigate)
+              {
+                Navigator.push(context, MaterialPageRoute(builder: (context)
+                {
+                  return whereToNavigate;
+                }
+                ));
+              }
+  
+     showDialogForOptions() 
+     {
+         return showDialog(context: context,
+                                        builder: (context)
+                                        {
+                                            return AlertDialog(
+                                                title: Text(Language.Language.whereToMOve),
+                                              //  content: Text(Language.Language.continueToLeave),
+                                                actions: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                                      Padding(
+                                                                        padding: const EdgeInsets.only(right:15),
+                                                                        child: dontDelete(Language.Language.teams,context),
+                                                                      ),
+                                                    yesDelete(Language.Language.searchPlayers,matchId)
+                                                                            
+                                                                      ],
+                                                                )
+                                                                              ],
+                                                                          );
+                                                                      }
+                                                      );
+                                                    }
+                      
+                    
+                      
+     
+Widget dontDelete(String res,context)
+                                                      {
+                                                        
+                                                          return GestureDetector(
+                                                            onTap: ()
+                                                            
+                                                            { 
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context)
+                                                          {
+                                                            return TeamForMatch(matchId);
+                                                          }  
+                                                          ));             
+                                                            }
+                                                            ,
+                                                            child: ClipRRect(
+                                                              // shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(10)
+                                                              ,
+                                                              // ),
+                                                              child: Container(
+                                                                color: Theme.of(context).buttonColor,
+                                                                height: MediaQuery.of(context).size.height/18,
+                                                                width: MediaQuery.of(context).size.width/6,
+                                                                child: Center(child: Text(res,
+                                                                style: TextStyle(
+                                                                    color: Colors.white
+                                                                ),
+                                                                ))),
+                                                            )
+                                                            
+                                                            );
+                                                      }
+                      
+                                                        Widget yesDelete(String res,int matchIde)
+                                                      {
+                                                        
+                                                          return GestureDetector(
+                                                            onTap: ()
+                                                            async
+                                                            { 
+                                                              goTo();
+                                                            }
+                                                            ,
+                                                            child: ClipRRect(
+                                                              // shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(10)
+                                                              ,
+                                                              // ),
+                                                              child: Container(
+                                                                color: Theme.of(context).buttonColor,
+                                                                height: MediaQuery.of(context).size.height/18,
+                                                                width: MediaQuery.of(context).size.width/3,
+                                                                child: Center(child: Text(res,
+                                                                style: TextStyle(
+                                                                    color: Colors.white
+                                                                ),
+                                                                ))),
+                                                            )
 
+                                                            );
+                                                      }
+
+
+                                                       goTo()
+                      
+                      {
+                      
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)
+                      
+                      {
+                        return SearchPlayers(matchId);
+                      }
+    
+                      ));
+                      }
+    
 }

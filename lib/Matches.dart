@@ -150,7 +150,7 @@ abstract class BaseMatches<T extends StatefulWidget> extends State<T>
 
 
 
-
+bool callSetStateWhenPoppingScreen = false;
 Widget getFloatingActionButton() 
 {
 return FloatingActionButton(
@@ -160,7 +160,7 @@ child: Icon(Icons.add,
 )
 ,onPressed: ()
 {
-addMatchesOrTeams(context);
+ addMatchesOrTeams(context);
 });
 
 }
@@ -638,14 +638,20 @@ fontSize: 20
 
 DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
 @override
-addMatchesOrTeams(BuildContext context)
+Future addMatchesOrTeams(BuildContext context)
+async
 {
-Navigator.push(context, MaterialPageRoute(builder: (context)
+callSetStateWhenPoppingScreen = await Navigator.push(context, MaterialPageRoute(builder: (context)
 {
-return RegisterAMatch('','','',dateFormat.format(DateTime.now()).toString(),7,5,0,false,Language.Language.registerAMatch,3);
+return RegisterAMatch('','','',dateFormat.format(DateTime.now()).toString(),7,5,0,false,Language.Language.registerAMatch,3,0);
 }
 ));
-
+if(callSetStateWhenPoppingScreen ==true)
+{
+  setState(() {
+    callSetStateWhenPoppingScreen  = false;
+  });
+}
 }
 
 
@@ -897,13 +903,21 @@ editMatchData(context,snapshotData);
     ));
       }
 
-void editMatchData(BuildContext context,snapshotData) 
+Future editMatchData(BuildContext context,snapshotData) 
+async
 {
-Navigator.push(context,MaterialPageRoute(builder: (context)
+
+callSetStateWhenPoppingScreen = await  Navigator.push(context,MaterialPageRoute(builder: (context)
 { 
-return RegisterAMatch(snapshotData.title,snapshotData.city,snapshotData.address,snapshotData.dateAndTime,snapshotData.frequency,snapshotData.matchType,snapshotData.id,snapshotData.benchListExist,Language.Language.update,snapshotData.benchListLimit);
+return RegisterAMatch(snapshotData.title,snapshotData.city,snapshotData.address,snapshotData.dateAndTime,snapshotData.frequency,snapshotData.matchType,snapshotData.id,snapshotData.benchListExist,Language.Language.update,snapshotData.benchListLimit,snapshotData.cost);
 }
 ));
+if(callSetStateWhenPoppingScreen == true)
+{
+  setState(() {
+    callSetStateWhenPoppingScreen = false;
+  });
+}
 }
 
 
