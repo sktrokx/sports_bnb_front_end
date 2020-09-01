@@ -64,7 +64,7 @@ final pages = [
          Column(
            children: [
              Expanded(
-               flex: 10,
+               flex: 5,
                child: Icon(MdiIcons.soccer)),
                Expanded(
                  flex: 1,
@@ -81,7 +81,7 @@ final pages = [
              Column(
            children: [
              Expanded(
-               flex: 10,
+               flex: 5,
                child: Icon(MdiIcons.soccerField)),
                Expanded(
                  flex: 1,
@@ -98,7 +98,7 @@ final pages = [
               Column(
            children: [
              Expanded(
-               flex: 10,
+               flex: 5,
                child: Icon(Icons.notifications_active)),
                Expanded(
                  flex: 1,
@@ -115,7 +115,7 @@ final pages = [
              Column(
            children: [
              Expanded(
-               flex: 10,
+               flex: 5,
                child: Icon(Icons.lock)),
                Expanded(
                  flex: 1,
